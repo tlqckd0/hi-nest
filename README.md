@@ -1,35 +1,48 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Description
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+NestJS 그냥 찍먹해본거임
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+노마드코더 무료강의 따라한것 REST API
 
-## Description
+https://nomadcoders.co/nestjs-fundamentals/lobby <-이거 
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
+# 전체적인 구조
 ```bash
-$ npm install
+NodeJS express를 Java Spring처럼 구조화시킨 프레임워크
+[repository는 없이 간단히 메모리 위에서 구동했드라고]
+
+@Controller -> @Controller('uri') (사용자 요청을 서비스로 연결해주는 곳)
+
+# @Get() / @Post() / @DELETE ... 여기도 이렇게 표시해서 사용함.
+# @Post()에서의 데이터는  -> create(@Body() movieData:CreateMovieDto) 이렇게 받고
+# @그냥 파라미터는 -> getOne(@Param("id") movieId: number) 이렇게 받으면 됨
+
+@Servire -> @Injectable (비즈니스 로직 부분)
+
+참고할거는 DTO,entity 생성하는 부분(typesrcipt) + main.ts에서 불필요한 정보 날라오는거 막는정도. 
+```
+
+# 테스트 방법
+```bash
+이것도 Java Spring이랑 비슷함
+javascript test 할수있는 JEST를 이용한다.
+
+beforeAll, beforeEach, afterAll그런것도 사용할 수 있음
+
+유닛테스트에서는 그냥 서비스로직에 대한 함수정도 확인하는 정도
+
+통합테스트(e2e)에서는 http 통신으로 컨트롤러 부분까지 확인가능함.
+(근대 이거 할때 main.ts에 있는것 처럼 테스트환경이랑 실제 환경을 같게 마춰주어야함)
+
+# describe('test name',()-> {테스트 로직})
+테스트 로직에서는
+유닛테스트
+# it('sub test name',()=>{ ... })
+
+통합테스트(e2e)
+# it('uri num',()=>{ request.... }).[get | post | ... ].send(...).expect( 반환값 )..
+아무튼 이렇게 테스트 할 있는 환경이 구성되어있음.
 ```
 
 ## Running the app
@@ -57,6 +70,8 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+
 
 ## Support
 
